@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Main {
     private static final String SOURCE_PATH = "src/main/java/";
@@ -40,14 +39,14 @@ public class Main {
     }
 
     public static void part1() {
-        Main.parse1(Main.getInputsPath() + "test1.txt");
+        parse1(getInputsPath() + "test1.txt");
     }
 
     public static void part2() {
-        Main.parse2(Main.getInputsPath() + "test1.txt");
+        parse2(getInputsPath() + "test1.txt");
     }
 
     public static void main(String[] args) {
-        Main.part1();
+        part1();
     }
 }

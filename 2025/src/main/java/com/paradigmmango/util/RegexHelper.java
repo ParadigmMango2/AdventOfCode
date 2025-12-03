@@ -10,24 +10,31 @@ public class RegexHelper {
     }
 
     public static List<String> getAll(Matcher matcher, int group) {
-        return matcher.results().map(matchResult -> matchResult.group(group)).toList();
+        return matcher
+                .results()
+                .map(matchResult -> matchResult.group(group))
+                .toList();
     }
 
     public static Matcher match(Pattern pattern, String str) {
         Matcher matcher = pattern.matcher(str);
+
         if (matcher.find()) {
             return matcher;
+        } else {
+            System.out.println("No match on str: " + str);
+            return null;
         }
-        System.out.println("No match on str: " + str);
-        return null;
     }
 
     public static Matcher matchFull(Pattern pattern, String str) {
         Matcher matcher = pattern.matcher(str);
+
         if (matcher.matches()) {
             return matcher;
+        } else {
+            System.out.println("No match on str: " + str);
+            return null;
         }
-        System.out.println("No match on str: " + str);
-        return null;
     }
 }
