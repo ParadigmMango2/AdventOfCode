@@ -182,7 +182,7 @@ public class Main {
 
         System.out.println(accessibleRolls);
     }
-+
+
     public static void main(String[] args) {
         part1();
         part2();
