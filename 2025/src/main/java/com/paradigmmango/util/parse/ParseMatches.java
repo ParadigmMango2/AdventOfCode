@@ -40,4 +40,8 @@ public class ParseMatches {
 
         return new ParseGroups(matchGroupsList);
     }
+
+    public MatchResult getFirstMatch() {
+        return matches.getFirst();
+    }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.regex.MatchResult;
 
 @AllArgsConstructor
 public class ParseMatchesList {
@@ -28,5 +29,13 @@ public class ParseMatchesList {
                 .toList();
 
         return new ParseGroupsList(parseGroupsList);
+    }
+
+    public ParseMatches getFirstMatches() {
+        List<MatchResult> firstMatches = matchesList.stream()
+                .map(ParseMatches::getFirstMatch)
+                .toList();
+
+        return new ParseMatches(firstMatches);
     }
 }

@@ -20,12 +20,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        var in = parseLines(getInputsPath() + "test1.txt");
-
+//        var in = parseLines(getInputsPath() + "test1.txt");
+//
 //        var line = in.get(0);
 
         var day1 = Parser.parseLines(getInputsPath() + "day1.txt")
                 .getMatches(Pattern.compile("([LR])(\\d+)"))
+                .getFirstMatches()
                 .toGroups()
                 .parseByGroupSet(groupSet -> new Pair<>(groupSet.get(0).charAt(0), Integer.parseInt(groupSet.get(1))));
 
@@ -33,7 +34,7 @@ public class Main {
         var day2 = Parser.parseLines(getInputsPath() + "test1.txt")
                 .getMatches(p)
                 .toGroups()
-                .parseByGroupSet(groupSet -> new Pair<>(Integer.parseInt(groupSet.get(0)), Long.parseLong(groupSet.get(1))));
+                .parseByGroupSet(groupSet -> new Pair<>(Long.parseLong(groupSet.get(0)), Long.parseLong(groupSet.get(1))));
 
         var day3 = Parser.parseChars(getInputsPath() + "chars.txt").parse(Character::getNumericValue);
 

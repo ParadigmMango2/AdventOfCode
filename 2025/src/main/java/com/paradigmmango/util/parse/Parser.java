@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
  1. X SKIP X Streams for non-terminal operations (!!! may drastically change code character !!!)
  2. DONE Lists operations
  3. DONE Parse mapping on ParseChars
- 4. Move ParseLines.getMatches(???)
+ 4. DONE Move ParseLines.getMatches(???)
+ 5. DONE First of each line
 */
 
 public class Parser {
