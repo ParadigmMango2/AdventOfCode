@@ -1,13 +1,12 @@
 package com.paradigmmango.sandbox;
 
 import com.paradigmmango.util.Pair;
-import com.paradigmmango.util.parse.ParseLines;
-import com.paradigmmango.util.parse.Parser2;
+import com.paradigmmango.util.parse.Parser;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import static com.paradigmmango.util.parse.Parser.*;
+import static com.paradigmmango.util.parse.ParserOld.*;
 
 public class Main {
     private static final String SOURCE_PATH = "src/main/java/";
@@ -23,13 +22,20 @@ public class Main {
     public static void main(String[] args) {
         var in = parseLines(getInputsPath() + "test1.txt");
 
-        var line = in.get(0);
+//        var line = in.get(0);
+
+        var day1 = Parser.parseLines(getInputsPath() + "day1.txt")
+                .getMatches(Pattern.compile("([LR])(\\d+)"))
+                .toGroups()
+                .parseByGroupSet(groupSet -> new Pair<>(groupSet.get(0).charAt(0), Integer.parseInt(groupSet.get(1))));
 
         var p = Pattern.compile("(\\d+)-(\\d+)");
-        var foo = Parser2.parseLines(getInputsPath() + "test1.txt")
+        var day2 = Parser.parseLines(getInputsPath() + "test1.txt")
                 .getMatches(p)
                 .toGroups()
                 .parseByGroupSet(groupSet -> new Pair<>(Integer.parseInt(groupSet.get(0)), Long.parseLong(groupSet.get(1))));
+
+        var day3 = Parser.parseChars(getInputsPath() + "chars.txt").parse(Character::getNumericValue);
 
         System.out.println();
     }
