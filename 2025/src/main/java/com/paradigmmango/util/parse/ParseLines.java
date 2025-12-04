@@ -11,11 +11,13 @@ import java.util.regex.Pattern;
 public class ParseLines {
     @Getter private List<String> lines;
 
-//    public ParseMatches matchLines(Pattern pattern) {
-//        return new ParseMatches(lines.stream()
-//                .map(line -> matchLine(pattern, line))
-//                .toList())
-//    }
+    public ParseMatchesList getMatches(Pattern pattern) {
+        List<ParseMatches> parseMatchesList = lines.stream()
+                .map(line -> getMatches(pattern, line))
+                .toList();
+
+        return new ParseMatchesList(parseMatchesList);
+    }
 
     static public ParseMatches getMatches(Pattern pattern, String str) {
         List<MatchResult> matches = pattern.matcher(str).results()

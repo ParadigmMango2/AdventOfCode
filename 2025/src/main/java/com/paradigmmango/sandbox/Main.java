@@ -2,6 +2,7 @@ package com.paradigmmango.sandbox;
 
 import com.paradigmmango.util.Pair;
 import com.paradigmmango.util.parse.ParseLines;
+import com.paradigmmango.util.parse.Parser2;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -25,9 +26,10 @@ public class Main {
         var line = in.get(0);
 
         var p = Pattern.compile("(\\d+)-(\\d+)");
-        var foo = ParseLines.getMatches(p, line).toGroups().parseByGroup(group -> {
-            return new Pair<>(Integer.parseInt(group.get(0)), Long.parseLong(group.get(1)));
-        });
+        var foo = Parser2.parseLines(getInputsPath() + "test1.txt")
+                .getMatches(p)
+                .toGroups()
+                .parseByGroupSet(groupSet -> new Pair<>(Integer.parseInt(groupSet.get(0)), Long.parseLong(groupSet.get(1))));
 
         System.out.println();
     }

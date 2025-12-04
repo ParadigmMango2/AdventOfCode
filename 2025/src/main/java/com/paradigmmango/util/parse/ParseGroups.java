@@ -19,7 +19,7 @@ public class ParseGroups {
     }
 
     // Here, C is a custom object to store diverse typed return variables
-    public <C> List<C> parseByGroup(Function<List<String>, C> parseFn) {
+    public <C> List<C> parseByGroupSet(Function<List<String>, C> parseFn) {
         return groups.stream()
                 .map(parseFn)
                 .toList();

@@ -12,16 +12,16 @@ import java.util.regex.MatchResult;
 public class ParseMatches {
     @Getter private List<MatchResult> matches;
 
+    public List<String> toStrs() {
+        return matches.stream()
+                .map(MatchResult::group)
+                .toList();
+    }
+
     public <T> List<T> parseStrs(Function<String, T> parseFn) {
         return matches.stream()
                 .map(MatchResult::group)
                 .map(parseFn)
-                .toList();
-    }
-
-    public List<String> toStrs() {
-        return matches.stream()
-                .map(MatchResult::group)
                 .toList();
     }
 

@@ -8,6 +8,14 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ TODO:
+ 1`. X SKIP X Streams for non-terminal operations (!!! may drastically change code character !!!)
+ 2. Lists operations
+ 3. Parse mapping on ParseChars
+ 4. Move ParseLines.getMatches(???)
+*/
+
 public class Parser2 {
     @SneakyThrows
     static public ParseLines parseLines(String path) {
