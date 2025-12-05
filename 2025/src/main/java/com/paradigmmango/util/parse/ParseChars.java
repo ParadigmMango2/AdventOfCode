@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 @AllArgsConstructor
 public class ParseChars {
-    @Getter List<List<Character>> chars;
+    @Getter private List<List<Character>> chars;
 
     public <T> List<List<T>> parse(Function<Character, T> parseFn) {
         return chars.stream()

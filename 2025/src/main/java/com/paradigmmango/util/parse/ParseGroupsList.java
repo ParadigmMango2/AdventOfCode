@@ -8,8 +8,7 @@ import java.util.function.Function;
 
 @AllArgsConstructor
 public class ParseGroupsList {
-    @Getter
-    List<ParseGroups> groupsList;
+    @Getter private List<ParseGroups> groupsList;
 
     public <T> List<List<List<T>>> parse(Function<String, T> parseFn) {
         return groupsList.stream()
