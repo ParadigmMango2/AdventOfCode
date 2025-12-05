@@ -1,6 +1,6 @@
 ```mermaid
 ---
-title: Abbe Parser
+title: Abbe Parserhttps://github.com/ParadigmMango2/AdventOfCode/blob/main/2025/src/main/java/com/paradigmmango/util/parse/README.md
 ---
 classDiagram
     class Parser{
@@ -53,7 +53,7 @@ classDiagram
         +parseStrs(Function~String, T~ parseFn) : List~List~T~~
         +toGroups() : ParseGroupsList
     }
-    ParseMatchesList *-- ParseMatches
+    %% ParseMatchesList *-- ParseMatches
     ParseMatchesList ..> ParseGroupsList : toGroups()
 
     class ParseGroupsList{
@@ -63,5 +63,5 @@ classDiagram
         +parse(Function~String, T~ parseFn) : List~List~List~T~~~
         +parseByGroupSet(Function~List&lt;String&gt;, C~ parseFn) : List~List~C~~
     }
-    ParseGroupsList *-- ParseGroups
+    %% ParseGroupsList *-- ParseGroups
 ```
