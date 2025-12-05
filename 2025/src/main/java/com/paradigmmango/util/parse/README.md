@@ -1,6 +1,6 @@
 ```mermaid
 ---
-title: Abbe Parserhttps://github.com/ParadigmMango2/AdventOfCode/blob/main/2025/src/main/java/com/paradigmmango/util/parse/README.md
+title: Abbe Parser
 ---
 classDiagram
     class Parser{
