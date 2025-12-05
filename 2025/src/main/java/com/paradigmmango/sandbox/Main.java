@@ -20,10 +20,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        var in = parseLines(getInputsPath() + "test1.txt");
-//
-//        var line = in.get(0);
-
         var day1 = Parser.parseLines(getInputsPath() + "day1.txt")
                 .getMatches(Pattern.compile("([LR])(\\d+)"))
                 .getFirstMatches()
@@ -31,10 +27,11 @@ public class Main {
                 .parseByGroupSet(groupSet -> new Pair<>(groupSet.get(0).charAt(0), Integer.parseInt(groupSet.get(1))));
 
         var p = Pattern.compile("(\\d+)-(\\d+)");
-        var day2 = Parser.parseLines(getInputsPath() + "test1.txt")
-                .getMatches(p)
+        var in = parseLines(getInputsPath() + "test1.txt");
+        var line = in.get(0);
+        var day2 = Parser.getMatches(p, line)
                 .toGroups()
-                .parseByGroupSet(groupSet -> new Pair<>(Long.parseLong(groupSet.get(0)), Long.parseLong(groupSet.get(1))));
+                .parse(Integer::parseInt);
 
         var day3 = Parser.parseChars(getInputsPath() + "chars.txt").parse(Character::getNumericValue);
 
