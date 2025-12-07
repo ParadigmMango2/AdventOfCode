@@ -51,7 +51,7 @@ public class Main {
 
         int width = grid.stream()
                 .map(List::size)
-                .mapToInt(v -> v)
+                .mapToInt(Integer::intValue)
                 .max()
                 .getAsInt();
 
