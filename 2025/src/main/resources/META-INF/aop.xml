@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.paradigmmango.util.CacheAspect"/>
+    </aspects>
+    <weaver options="-verbose -showWeaveInfo">
+        <include within="com.paradigmmango..*"/>
+    </weaver>
+</aspectj>
