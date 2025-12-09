@@ -50,15 +50,15 @@ public class Main {
                 .toList();
     }
 
-    @SneakyThrows
-    private static void parse2(String path) {
-        @Cleanup BufferedReader br = new BufferedReader(new FileReader(path));
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            System.out.println(line);
-        }
-    }
+//    @SneakyThrows
+//    private static void parse2(String path) {
+//        @Cleanup BufferedReader br = new BufferedReader(new FileReader(path));
+//
+//        String line;
+//        while ((line = br.readLine()) != null) {
+//            System.out.println(line);
+//        }
+//    }
 
     public static void part1() {
         var input = parse1(getInputsPath() + "test1.txt");
