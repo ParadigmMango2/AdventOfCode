@@ -382,6 +382,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         part2RetryRetry();
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+
+        System.out.println(duration);
     }
 }
