@@ -1,9 +1,6 @@
 package com.paradigmmango.day10;
 
-import com.microsoft.z3.Context;
-import com.microsoft.z3.IntExpr;
-import com.microsoft.z3.Optimize;
-import com.microsoft.z3.Status;
+import com.microsoft.z3.*;
 import com.paradigmmango.util.ComboFinder;
 import com.paradigmmango.util.parse.Parser;
 import lombok.AllArgsConstructor;
@@ -242,7 +239,7 @@ public class Main {
             IntExpr bSum = ctx.mkIntConst("B_SUM");
             opt.Add(ctx.mkEq(bSum, ctx.mkAdd(bVars.toArray(new IntExpr[0]))));
 
-            Optimize.Handle minCountRaw = opt.MkMinimize(bSum);
+            Optimize.Handle<IntSort> minCountRaw = opt.MkMinimize(bSum);
 
 //            System.out.println(opt.Check());
             long minCount = Long.MIN_VALUE;
@@ -260,6 +257,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         part2Z3();
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime) / 1000000;
+
+        System.out.println(duration);
     }
 }

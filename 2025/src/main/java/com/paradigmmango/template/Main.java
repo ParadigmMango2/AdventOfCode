@@ -26,6 +26,8 @@ public class Main {
         while ((line = br.readLine()) != null) {
             System.out.println(line);
         }
+
+        System.out.println();
     }
 
     @SneakyThrows
@@ -36,14 +38,20 @@ public class Main {
         while ((line = br.readLine()) != null) {
             System.out.println(line);
         }
+
+        System.out.println();
     }
 
     public static void part1() {
         parse1(getInputsPath() + "test1.txt");
+
+        System.out.println();
     }
 
     public static void part2() {
         parse2(getInputsPath() + "test1.txt");
+
+        System.out.println();
     }
 
     public static void main(String[] args) {
