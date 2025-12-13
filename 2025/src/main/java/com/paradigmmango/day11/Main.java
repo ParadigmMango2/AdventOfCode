@@ -1,7 +1,5 @@
 package com.paradigmmango.day11;
 
-import com.paradigmmango.util.Cache;
-import com.paradigmmango.util.Pair;
 import com.paradigmmango.util.parse.ParseMatches;
 import com.paradigmmango.util.parse.Parser;
 import lombok.Cleanup;
@@ -17,13 +15,10 @@ import java.util.regex.Pattern;
 class Node {
     private String name;
     private List<Node> outgoingConnections;
-    public static HashMap<String, Node> identities = new HashMap<>();
 
     public Node(String name) {
         this.name = name;
         outgoingConnections = new ArrayList<>();
-
-        identities.put(name, this);
     }
 
     @Override
@@ -44,31 +39,33 @@ public class Main {
     }
 
     @SneakyThrows
-    private static Node parse1(String path) {
+    private static HashMap<String, Node> parse1(String path) {
         var lines = Parser.parseLines(path).getMatches(Pattern.compile("\\w{3}")).getMatchesList().stream()
                 .map(ParseMatches::toStrs)
                 .toList();
 
         Node[] nodes = new Node[lines.size()];
-        Node out = new Node("out");
+        HashMap<String, Node> nodesMap = new HashMap<>();
+        nodesMap.put("out", new Node("out"));
 
         // add nodes
         for (int i = 0; i < lines.size(); i++) {
-            nodes[i] = new Node(lines.get(i).getFirst());
+            Node node = new Node(lines.get(i).getFirst());
+            nodes[i] = node;
+            nodesMap.put(node.getName(), node);
         }
 
         // add connections
-        for (int i = 0; i < lines.size(); i++) {
-            var line = lines.get(i);
-            Node node = Node.identities.get(line.getFirst());
+        for (List<String> line : lines) {
+            Node node = nodesMap.get(line.getFirst());
 
             for (int j = 1; j < line.size(); j++) {
-                Node connection = Node.identities.get(line.get(j));
+                Node connection = nodesMap.get(line.get(j));
                 node.getOutgoingConnections().add(connection);
             }
         }
 
-        return nodes[0];
+        return nodesMap;
     }
 
     @SneakyThrows
@@ -84,7 +81,7 @@ public class Main {
     }
 
     private static Map<String, Long> cache = new HashMap<>();
-    public static long cachedDfs (Node curNode, String tgt) {
+    public static long cachedDfs(Node curNode, String tgt) {
         String key = curNode.getName() + tgt;
 
         if (cache.containsKey(key)) return cache.get(key);
@@ -109,19 +106,19 @@ public class Main {
     }
 
     public static void part1() {
-        Node you = parse1(getInputsPath() + "real.txt");
+        Node you = parse1(getInputsPath() + "real.txt").get("you");
 
-        long paths = dfs(you, "out");
+        long paths = cachedDfs(you, "out");
 
         System.out.println(paths);
     }
 
     public static void part2() {
-        parse1(getInputsPath() + "real.txt");
+        HashMap<String, Node> nodeMap = parse1(getInputsPath() + "real.txt");
 
-        Node svr = Node.identities.get("svr");
-        Node fft = Node.identities.get("fft");
-        Node dac = Node.identities.get("dac");
+        Node svr = nodeMap.get("svr");
+        Node fft = nodeMap.get("fft");
+        Node dac = nodeMap.get("dac");
 
         long svrToFft = dfs(svr, "fft");
         long fftToDac = dfs(fft, "dac");
@@ -139,7 +136,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        part1();
+//        part1();
         part2();
     }
 }

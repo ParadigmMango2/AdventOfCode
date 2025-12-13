@@ -204,49 +204,49 @@ public class Main {
         var input = parse1(getInputsPath() + "real.txt");
 
         for (Procedure proc : input) {
-            Context ctx = new Context();
-            Optimize opt = ctx.mkOptimize();
-
             var wirings = proc.getButtonWirings();
             var joltReqs = proc.getJoltReqs();
+
+            // build solver
+            Context ctx = new Context();
+            Optimize opt = ctx.mkOptimize();
 
             // lhs vars of each equation
             List<List<IntExpr>> lhsVars = new ArrayList<>();
             for (int i = 0; i < joltReqs.length; i++) lhsVars.add(new ArrayList<>());
 
+            // instantiate each button and it's conditions
             List<IntExpr> bVars = new ArrayList<>();
             for (int i = 0; i < wirings.length; i++) {
                 IntExpr bExp = ctx.mkIntConst("B_" + i);
                 bVars.add(bExp);
 
+                // ensure button is pressed positive number of times
                 opt.Add(ctx.mkGe(bExp, ctx.mkInt(0)));
 
+                // add button to the count of each joltage
                 for (int button : wirings[i]) {
                     lhsVars.get(button).add(bExp);
                 }
-
-//            System.out.println();
             }
 
+            // formally add each equation to the sovler
             for (int i = 0; i < joltReqs.length; i++) {
                 List<IntExpr> lhs = lhsVars.get(i);
 
                 opt.Add(ctx.mkEq(ctx.mkAdd(lhs.toArray(new IntExpr[0])), ctx.mkInt(joltReqs[i])));
-
-//            System.out.println();
             }
 
+            // define the target variable and solve
             IntExpr bSum = ctx.mkIntConst("B_SUM");
             opt.Add(ctx.mkEq(bSum, ctx.mkAdd(bVars.toArray(new IntExpr[0]))));
 
             Optimize.Handle<IntSort> minCountRaw = opt.MkMinimize(bSum);
 
-//            System.out.println(opt.Check());
-            long minCount = Long.MIN_VALUE;
+            long minCount = Long.MIN_VALUE; // default to an absurdly negative number to ruin output if an error occurs
             if (opt.Check() == Status.SATISFIABLE) {
                 minCount = Long.parseLong(minCountRaw.toString());
             }
-//            System.out.println(minCount);
 
             totalFewest += minCount;
 
